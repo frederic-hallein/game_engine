@@ -37,17 +37,18 @@ void Player::handleEvents(SDL_Event event)
 
 void Player::update()
 {
+    Entity::update();
 
     switch (direction){
     case Direction::NONE:
         break;
     case Direction::LEFT:
         std::cout << "LEFT" << '\n';
-        dst_rect.x -= 10;
+        x_pos -= 10;
         break;
     case Direction::RIGHT:
         std::cout << "RIGHT" << '\n';
-        dst_rect.x += 10;
+        x_pos += 10;
         break;
     case Direction::JUMP:
         std::cout << "JUMP" << '\n';

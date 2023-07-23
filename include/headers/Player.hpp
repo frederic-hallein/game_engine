@@ -8,8 +8,8 @@ public:
     Player();
     ~Player();
     
-    void handleEvents(SDL_Event event) override;
-    void update() override;
+    void handleEvents(SDL_Event event);
+    void update();
 
     enum Direction {NONE, LEFT, RIGHT, JUMP};
 

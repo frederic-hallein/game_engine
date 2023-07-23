@@ -15,19 +15,18 @@ public:
     
     void draw();
 
-    virtual void handleEvents(SDL_Event event);
-    virtual void update();
+    void handleEvents(SDL_Event event);
+    void update();
 
 protected:
     double x_pos;
     double y_pos;
-
-    SDL_Rect src_rect;
-    SDL_Rect dst_rect;
-    Texture texture;
     
 private:
     SDL_Renderer* renderer;
+    SDL_Rect src_rect;
+    SDL_Rect dst_rect;
+    Texture texture;
 
 
 };
