@@ -15,8 +15,8 @@ void Entity::init(SDL_Renderer* renderer, const char* path_name,
     texture.init(renderer, path_name);
 
     // setup entity position
-    x_pos = dst_rect_x;
-    y_pos = dst_rect_y;
+    pos.x = dst_rect_x;
+    pos.y = dst_rect_y;
 
     // setup rectangle for rendering texture
     // source rectangle
@@ -26,8 +26,8 @@ void Entity::init(SDL_Renderer* renderer, const char* path_name,
     src_rect.h = src_rect_h; 
 
     // destination rectangle
-    dst_rect.x = x_pos;
-    dst_rect.y = y_pos - dst_rect_h;
+    dst_rect.x = pos.x;
+    dst_rect.y = pos.y - dst_rect_h;
     dst_rect.w = dst_rect_w;
     dst_rect.h = dst_rect_h;
 
@@ -53,5 +53,5 @@ void Entity::handleEvents(SDL_Event event) {}
 
 void Entity::update() 
 {
-    dst_rect.x = x_pos;
+    dst_rect.x = pos.x;
 }

@@ -15,14 +15,16 @@ int main(int argc, char* argv[])
     Game game;
     game.init("2D Platformer", SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    FPSTimer FPStimer; 
+    Timer timer; 
     while (game.running()){
-        FPStimer.start();
+        timer.start();
+
         game.handleEvents();
         game.update();
         game.render();
-        FPStimer.stop();
-        
+
+        timer.stop();
+        timer.delayFrame();
     }
 
     game.clean();

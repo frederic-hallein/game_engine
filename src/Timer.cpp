@@ -1,21 +1,21 @@
 #include <SDL2/SDL.h>
+#include <iostream>
 
 #include "headers/Timer.hpp"
 
 static const int FPS = 60;
 static const int frame_delay = 1000 / FPS;
 
-FPSTimer::FPSTimer() {}
+Timer::Timer() {}
 
-FPSTimer::~FPSTimer() {}
+Timer::~Timer() {}
 
-void FPSTimer::start()
+void Timer::start() {frame_start = SDL_GetTicks();}
+
+void Timer::stop() {frame_time = SDL_GetTicks() - frame_start;}
+
+void Timer::delayFrame()
 {
-    frame_start = SDL_GetTicks();
-}
-
-void FPSTimer::stop()
-{
-    frame_time = SDL_GetTicks() - frame_start;
     if (frame_delay > frame_time) {SDL_Delay(frame_delay - frame_time);}
 }
+

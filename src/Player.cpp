@@ -43,15 +43,15 @@ void Player::update()
     case Direction::NONE:
         break;
     case Direction::LEFT:
-        std::cout << "LEFT" << '\n';
-        x_pos -= 10;
+        //std::cout << "LEFT" << '\n';
+        pos.x -= 10;
         break;
     case Direction::RIGHT:
-        std::cout << "RIGHT" << '\n';
-        x_pos += 10;
+        //std::cout << "RIGHT" << '\n';
+        pos.x += 10;
         break;
     case Direction::JUMP:
-        std::cout << "JUMP" << '\n';
+        //std::cout << "JUMP" << '\n';
         break;
     }
 }

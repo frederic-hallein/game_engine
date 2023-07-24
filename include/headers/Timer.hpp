@@ -1,12 +1,13 @@
 #pragma once
 
-class FPSTimer{
+class Timer{
 public:
-    FPSTimer();
-    ~FPSTimer();
+    Timer();
+    ~Timer();
 
     void start();
     void stop();
+    void delayFrame();
 
 private:
     uint32_t frame_start;

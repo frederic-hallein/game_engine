@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 
 #include "headers/Texture.hpp"
+#include "headers/Vector2D.hpp"
 
 class Entity {
 public:
@@ -19,8 +20,10 @@ public:
     void update();
 
 protected:
-    double x_pos;
-    double y_pos;
+    Vector2D pos;
+    Vector2D vel;
+    Vector2D force;
+    float mass;
     
 private:
     SDL_Renderer* renderer;
