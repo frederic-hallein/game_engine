@@ -2,7 +2,13 @@
 
 #include "headers/Player.hpp"
 
-Player::Player() {}
+Player::Player() 
+{
+    mass = 100.0f;
+    acceleration.x = 0.0f;
+    terminal_velocity.x = 10.0f;
+    terminal_velocity.y = 10.0f;
+}
 
 Player::~Player() {std::cout << "Player destroyed" << std::endl;}
 
@@ -37,21 +43,42 @@ void Player::handleEvents(SDL_Event event)
 
 void Player::update()
 {
+
     Entity::update();
 
     switch (direction){
     case Direction::NONE:
+        {
+        if (velocity.x < 0.0f)
+        {
+            acceleration.x = friction.x;
+            if (velocity.x >= 0.0f) {velocity.x = 0.0f;}
+        }
+        else if (velocity.x > 0.0f)
+        {
+            acceleration.x = -friction.x;
+            if (velocity.x <= 0.0f) {velocity.x = 0.0f;}
+        }
+        else {acceleration.x = 0.0f;}
         break;
+        }
     case Direction::LEFT:
-        //std::cout << "LEFT" << '\n';
-        pos.x -= 10;
+        {
+        acceleration.x = -1.0f;
+        if (velocity.x <= -terminal_velocity.x) {velocity.x = -terminal_velocity.x;}
         break;
+        }
     case Direction::RIGHT:
-        //std::cout << "RIGHT" << '\n';
-        pos.x += 10;
+        {
+        acceleration.x = 1.0f;
+        if (velocity.x >= terminal_velocity.x) {velocity.x = terminal_velocity.x;} 
         break;
+        }
     case Direction::JUMP:
+        {
         //std::cout << "JUMP" << '\n';
         break;
+        }
     }
+
 }

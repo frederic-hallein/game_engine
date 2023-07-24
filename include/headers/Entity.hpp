@@ -5,6 +5,10 @@
 #include "headers/Texture.hpp"
 #include "headers/Vector2D.hpp"
 
+static Vector2D gravity(0.0f, 0.0f);
+static Vector2D friction(0.5f, 0.0f);
+
+
 class Entity {
 public:
     Entity();
@@ -18,17 +22,21 @@ public:
 
     void handleEvents(SDL_Event event);
     void update();
+    void printInfo();
 
 protected:
-    Vector2D pos;
-    Vector2D vel;
+    SDL_Rect src_rect;
+    SDL_Rect dst_rect;
+
+    Vector2D position;
+    Vector2D velocity;
+    Vector2D terminal_velocity;
+    Vector2D acceleration;
     Vector2D force;
     float mass;
     
 private:
     SDL_Renderer* renderer;
-    SDL_Rect src_rect;
-    SDL_Rect dst_rect;
     Texture texture;
 
 

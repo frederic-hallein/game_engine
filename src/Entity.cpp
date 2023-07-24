@@ -15,8 +15,8 @@ void Entity::init(SDL_Renderer* renderer, const char* path_name,
     texture.init(renderer, path_name);
 
     // setup entity position
-    pos.x = dst_rect_x;
-    pos.y = dst_rect_y;
+    position.x = dst_rect_x;
+    position.y = dst_rect_y;
 
     // setup rectangle for rendering texture
     // source rectangle
@@ -26,8 +26,8 @@ void Entity::init(SDL_Renderer* renderer, const char* path_name,
     src_rect.h = src_rect_h; 
 
     // destination rectangle
-    dst_rect.x = pos.x;
-    dst_rect.y = pos.y - dst_rect_h;
+    dst_rect.x = position.x;
+    dst_rect.y = position.y - dst_rect_h;
     dst_rect.w = dst_rect_w;
     dst_rect.h = dst_rect_h;
 
@@ -53,5 +53,32 @@ void Entity::handleEvents(SDL_Event event) {}
 
 void Entity::update() 
 {
-    dst_rect.x = pos.x;
+    // apply gravity
+    force.y += mass * gravity.y;
+    velocity.y += force.y * (1.0f / mass);
+    if (velocity.y >= terminal_velocity.y) {velocity.y = terminal_velocity.y;}
+    position.y += velocity.y;
+    
+    dst_rect.y = position.y; // move rect
+
+    // move
+    force.x += mass * acceleration.x;
+    velocity.x += force.x * (1.0f / mass);
+    position.x += velocity.x;
+    
+    dst_rect.x = position.x; // move rect
+
+    Entity::printInfo();
+
+    // reset net force
+    force.x = 0.0f;
+    force.y = 0.0f;
+}
+
+void Entity::printInfo()
+{
+    std::cout << "F: " << "(" << force.x << ", " << force.y << ") ";
+    std::cout << "acc: " << "(" << acceleration.x << ", " << acceleration.y << ") ";
+    std::cout << "vel: " << "(" << velocity.x << ", " << velocity.y << ") ";
+    std::cout << "pos: " << "(" << position.x << ", " << position.y << ") " << '\n';
 }
