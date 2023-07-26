@@ -7,7 +7,7 @@ Player::Player()
     mass = 100.0f;
     acceleration.x = 0.0f;
     terminal_velocity.x = 10.0f;
-    terminal_velocity.y = 10.0f;
+    terminal_velocity.y = 15.0f;
 }
 
 Player::~Player() {std::cout << "Player destroyed" << std::endl;}
@@ -16,29 +16,43 @@ void Player::handleEvents(SDL_Event event)
 {
     switch(event.type){
     case SDL_KEYDOWN:
-        {
-        Uint8 const* keys = SDL_GetKeyboardState(nullptr);
-        if(keys[SDL_SCANCODE_A] == 1)
-            direction = Direction::LEFT;
-        else if(keys[SDL_SCANCODE_D] == 1)
-            direction = Direction::RIGHT;
-        else if(keys[SDL_SCANCODE_SPACE] == 1)
-            direction = Direction::JUMP;
-        break;
+        switch(event.key.keysym.sym){
+        case SDLK_q:
+            move = Move::LEFT;
+            break;
+        case SDLK_d:
+            move = Move::RIGHT;
+            break;
+        case SDLK_SPACE:
+            action = Action::JUMP;
+            break;
+        default:
+            break;
         }
+        break;
+
+
     case SDL_KEYUP:
-        {
-        Uint8 const* keys = SDL_GetKeyboardState(nullptr);
-        if(keys[SDL_SCANCODE_A] == 0)
-            direction = Direction::NONE;
-        else if(keys[SDL_SCANCODE_D] == 0)
-            direction = Direction::NONE;
-        else if(keys[SDL_SCANCODE_SPACE] == 0)
-            direction = Direction::NONE;
-        break;
+        switch(event.key.keysym.sym){
+        case SDLK_q:
+            move = Move::NONE;
+            break;
+        case SDLK_d:
+            move = Move::NONE;
+            break;
+        case SDLK_SPACE:
+            action = Action::NO_JUMP;
+            break;
+        default:
+            break;
         }
+        break;
+
+    default:
+        break;
+
             
-    }
+    } 
 }
 
 void Player::update()
@@ -46,39 +60,60 @@ void Player::update()
 
     Entity::update();
 
-    switch (direction){
-    case Direction::NONE:
-        {
+    switch (move){
+    case Move::NONE:
+        std::cout << "NONE" << '\n';
         if (velocity.x < 0.0f)
         {
-            acceleration.x = friction.x;
+            acceleration.x = 0.0f;
+            velocity.x += friction.x;
             if (velocity.x >= 0.0f) {velocity.x = 0.0f;}
         }
         else if (velocity.x > 0.0f)
         {
-            acceleration.x = -friction.x;
+            acceleration.x = 0.0f;
+            velocity.x -= friction.x;
             if (velocity.x <= 0.0f) {velocity.x = 0.0f;}
         }
-        else {acceleration.x = 0.0f;}
+        else {acceleration.x = 0.0f;}        
         break;
-        }
-    case Direction::LEFT:
-        {
+    case Move::LEFT:
+        movingRight = false;
+        std::cout << "LEFT" << '\n';
         acceleration.x = -1.0f;
         if (velocity.x <= -terminal_velocity.x) {velocity.x = -terminal_velocity.x;}
         break;
-        }
-    case Direction::RIGHT:
-        {
+    case Move::RIGHT:
+        movingRight = true;
+        std::cout << "RIGHT" << '\n';
         acceleration.x = 1.0f;
         if (velocity.x >= terminal_velocity.x) {velocity.x = terminal_velocity.x;} 
         break;
-        }
-    case Direction::JUMP:
-        {
-        //std::cout << "JUMP" << '\n';
+
+    default:
         break;
-        }
     }
+
+
+    switch (action){
+    case Action::NO_JUMP:
+        std::cout << "NO JUMP" << '\n';
+        if (velocity.y >= terminal_velocity.y) {velocity.y = terminal_velocity.y;}
+        else {acceleration.y = 0.0f;}
+        break;
+
+    case Action::JUMP:
+        if (hitGround) 
+        {
+            std::cout << "JUMP" << '\n';
+            acceleration.y = -20.0f;  
+            hitGround = false;
+        }
+        else {acceleration.y = 0.0f;}
+        break;
+        
+    default:
+        break;
+    } 
 
 }

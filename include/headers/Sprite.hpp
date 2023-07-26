@@ -2,16 +2,16 @@
 
 #include <SDL2/SDL.h>
 
-class Texture {
+class Sprite {
 public:
-    Texture();
-    ~Texture();
+    Sprite();
+    ~Sprite();
 
     void init(SDL_Renderer* renderer, const char* path_name);
     void clear();
 
     SDL_Texture* getTexture();
 private:
-    SDL_Surface* SDL_surface = nullptr;
-    SDL_Texture* SDL_texture = nullptr;
+    SDL_Surface* surface = nullptr;
+    SDL_Texture* texture = nullptr;
 };

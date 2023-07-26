@@ -1,7 +1,7 @@
 #pragma once
 
 #include "headers/Entity.hpp"
-#include "headers/Texture.hpp"
+#include "headers/Sprite.hpp"
 
 class Player : public Entity {
 public:
@@ -11,10 +11,14 @@ public:
     void handleEvents(SDL_Event event);
     void update();
 
-    enum Direction {NONE, LEFT, RIGHT, JUMP};
+    enum Move {NONE, LEFT, RIGHT};
+    enum Action {NO_JUMP, JUMP};
+
+    int amount_jumps = 2;
 
 private:
-    Direction direction;
+    Move move;
+    Action action;
 
 };
 

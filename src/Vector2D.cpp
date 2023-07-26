@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "headers/Vector2D.hpp"
 
 
