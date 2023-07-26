@@ -14,6 +14,8 @@ Player::~Player() {std::cout << "Player destroyed" << std::endl;}
 
 void Player::handleEvents(SDL_Event event)
 {
+
+
     switch(event.type){
     case SDL_KEYDOWN:
         switch(event.key.keysym.sym){
@@ -42,6 +44,7 @@ void Player::handleEvents(SDL_Event event)
             break;
         case SDLK_SPACE:
             action = Action::NO_JUMP;
+            hasJumped = false;
             break;
         default:
             break;
@@ -62,7 +65,7 @@ void Player::update()
 
     switch (move){
     case Move::NONE:
-        std::cout << "NONE" << '\n';
+        //std::cout << "NONE" << '\n';
         if (velocity.x < 0.0f)
         {
             acceleration.x = 0.0f;
@@ -78,14 +81,14 @@ void Player::update()
         else {acceleration.x = 0.0f;}        
         break;
     case Move::LEFT:
-        movingRight = false;
-        std::cout << "LEFT" << '\n';
+        lookingRight = false;
+        //std::cout << "LEFT" << '\n';
         acceleration.x = -1.0f;
         if (velocity.x <= -terminal_velocity.x) {velocity.x = -terminal_velocity.x;}
         break;
     case Move::RIGHT:
-        movingRight = true;
-        std::cout << "RIGHT" << '\n';
+        lookingRight = true;
+        //std::cout << "RIGHT" << '\n';
         acceleration.x = 1.0f;
         if (velocity.x >= terminal_velocity.x) {velocity.x = terminal_velocity.x;} 
         break;
@@ -97,17 +100,20 @@ void Player::update()
 
     switch (action){
     case Action::NO_JUMP:
-        std::cout << "NO JUMP" << '\n';
+        //std::cout << "NO JUMP" << '\n';
         if (velocity.y >= terminal_velocity.y) {velocity.y = terminal_velocity.y;}
         else {acceleration.y = 0.0f;}
         break;
 
     case Action::JUMP:
-        if (hitGround) 
+        if ((hitGround || amount_jumps > 0) && !hasJumped) 
         {
-            std::cout << "JUMP" << '\n';
-            acceleration.y = -20.0f;  
+            //std::cout << "JUMP" << '\n';
+            acceleration.y = -20.0f; 
+            amount_jumps--;
+            std::cout << amount_jumps << '\n';
             hitGround = false;
+            hasJumped = true;
         }
         else {acceleration.y = 0.0f;}
         break;

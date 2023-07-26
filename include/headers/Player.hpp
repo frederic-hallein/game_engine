@@ -14,9 +14,10 @@ public:
     enum Move {NONE, LEFT, RIGHT};
     enum Action {NO_JUMP, JUMP};
 
-    int amount_jumps = 2;
 
 private:
+    int amount_jumps = 2;
+
     Move move;
     Action action;
 

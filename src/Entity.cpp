@@ -58,7 +58,7 @@ void Entity::draw()
     SDL_RenderClear(renderer);
 
     // flip player sprite
-    if (movingRight)
+    if (lookingRight)
     {
         SDL_RenderCopyEx(renderer, sprite.getTexture(), &src_rect, &dst_rect, 0, nullptr, SDL_FLIP_NONE);
     }

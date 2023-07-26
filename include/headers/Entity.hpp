@@ -25,9 +25,10 @@ public:
     void printInfo();
 
     void updateRectanglePosition();
-
+    
+    bool hasJumped = false;
     bool hitGround = false;
-    bool movingRight = true;
+    bool lookingRight = true;
 protected:
     SDL_Rect src_rect;
     SDL_Rect dst_rect;
