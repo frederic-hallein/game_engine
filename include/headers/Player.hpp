@@ -16,7 +16,7 @@ public:
 
 
 private:
-    int amount_jumps = 2;
+    int jump_count = 2;
 
     Move move;
     Action action;

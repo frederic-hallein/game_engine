@@ -34,7 +34,7 @@ void Game::init(const char* title, int SCREEN_WIDTH, int SCREEN_HEIGHT)
     // initialize player
     int sprite_section_x = 32;
     int sprite_section_y = 43;
-    int sprite_scale = 3;
+    int sprite_scale = 1;
     player.init(renderer, "assets/player/player.png", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, sprite_section_x * sprite_scale, sprite_section_y * sprite_scale, 0, 0, sprite_section_x, sprite_section_y);
 }
 

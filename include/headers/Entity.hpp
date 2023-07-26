@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 
 #include "headers/Sprite.hpp"
+#include "headers/Collider.hpp"
 #include "headers/Vector2D.hpp"
 
 static Vector2D gravity(0.0f, 1.0f);
@@ -24,14 +25,16 @@ public:
     void update();
     void printInfo();
 
-    void updateRectanglePosition();
-    
+    void updateSpriteRectPosition();
+    void updateColliderPosition();
+
     bool hasJumped = false;
     bool hitGround = false;
     bool lookingRight = true;
 protected:
-    SDL_Rect src_rect;
-    SDL_Rect dst_rect;
+    SDL_Rect sprite_src_rect;
+    SDL_Rect sprite_dst_rect;
+    SDL_Rect coll_rect;
 
     float mass;
     Vector2D position;
@@ -40,12 +43,12 @@ protected:
     Vector2D acceleration;
     Vector2D force;
 
-    Vector2D bottom_center;
-    Vector2D bottom_right;
-    Vector2D bottom_left;
-    Vector2D top_center;
-    Vector2D top_right;
-    Vector2D top_left;
+    Vector2D sprite_bottom_center;
+    Vector2D sprite_bottom_right;
+    Vector2D sprite_bottom_left;
+    Vector2D sprite_top_center;
+    Vector2D sprite_top_right;
+    Vector2D sprite_top_left;
 
     
 private:

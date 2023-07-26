@@ -7,7 +7,7 @@ Player::Player()
     mass = 100.0f;
     acceleration.x = 0.0f;
     terminal_velocity.x = 10.0f;
-    terminal_velocity.y = 15.0f;
+    terminal_velocity.y = 20.0f;
 }
 
 Player::~Player() {std::cout << "Player destroyed" << std::endl;}
@@ -106,16 +106,29 @@ void Player::update()
         break;
 
     case Action::JUMP:
-        if ((hitGround || amount_jumps > 0) && !hasJumped) 
+        if (hitGround && jump_count <= 0) {jump_count = 2;}
+
+        if (hitGround && !hasJumped) 
         {
             //std::cout << "JUMP" << '\n';
-            acceleration.y = -20.0f; 
-            amount_jumps--;
-            std::cout << amount_jumps << '\n';
+            acceleration.y = -20.0f;
+            jump_count--;
+
+            hitGround = false;
+            hasJumped = true;
+        }
+        else if (!hitGround && !hasJumped && jump_count > 0)
+        {
+
+            if (velocity.y <= -terminal_velocity.y) {acceleration.y = -20.0f;}
+            else {velocity.y = -terminal_velocity.y;}
+            jump_count--;
+
             hitGround = false;
             hasJumped = true;
         }
         else {acceleration.y = 0.0f;}
+
         break;
         
     default:
