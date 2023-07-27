@@ -25,9 +25,13 @@ public:
     void draw();
     void printInfo();
 
-protected:
     enum Move {NO_MOVE, MOVE_LEFT, MOVE_RIGHT};
     enum Jump {NO_JUMP, JUMP};
+
+protected:
+
+    Move move;
+    Jump jump;
 
     bool hasJumped = false;
     bool hitGround = false;
@@ -43,10 +47,12 @@ protected:
     Vector2D acceleration;
     Vector2D force;
     
+    Collider collider;
+    
 private:
     SDL_Renderer* renderer;
+    
     Sprite sprite;
-    Collider collider;
 
 
 

@@ -2,9 +2,10 @@
 
 #include <SDL2/SDL.h>
 
+#include "headers/SpriteManager.hpp"
 #include "headers/Vector2D.hpp"
 
-class Sprite {
+class Sprite : public SpriteManager{
 public:
     Sprite();
     ~Sprite();

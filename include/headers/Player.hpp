@@ -1,7 +1,6 @@
 #pragma once
 
 #include "headers/Entity.hpp"
-#include "headers/Sprite.hpp"
 
 class Player : public Entity {
 public:
@@ -12,8 +11,6 @@ public:
     void update();
 
 private:
-    Move move;
-    Jump jump;
 
     int jump_count = 2;
 

@@ -9,9 +9,7 @@ public:
     Collider();
     ~Collider();
 
-    void init(SDL_Renderer* renderer,
-            int position_x, int position_y, int dst_rect_w, int dst_rect_h,
-            int src_rect_x, int src_rect_y, int src_rect_w, int src_rect_h);
+    void init(SDL_Renderer* renderer, int position_x, int position_y, int dst_rect_w, int dst_rect_h);
 
     void update();
     void draw();
@@ -20,6 +18,9 @@ public:
     SDL_Rect coll_rect;
 
     Vector2D position;
+
+    float delta_w = 0.0f;
+    float delta_h = 0.0f;
     
     Vector2D bottom_center;
     Vector2D bottom_right;
@@ -27,7 +28,6 @@ public:
     Vector2D top_center;
     Vector2D top_right;
     Vector2D top_left;
-
 
 private:
     SDL_Renderer* renderer;

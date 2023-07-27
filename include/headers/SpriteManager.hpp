@@ -5,6 +5,9 @@ public:
     SpriteManager();
     ~SpriteManager();
 
+    void init();
+    void update();
+
 protected:
     enum animation {IDLE, RUN, JUMP, FALL};
 

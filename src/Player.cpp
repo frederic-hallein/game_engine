@@ -4,6 +4,9 @@
 
 Player::Player() 
 {
+    collider.delta_w = 10.0f;
+    collider.delta_h = 0.0f;
+
     mass = 100.0f;
     terminal_velocity.x = 10.0f;
     terminal_velocity.y = 20.0f;
@@ -23,7 +26,6 @@ void Player::handleEvents(SDL_Event event)
             move = Move::MOVE_LEFT;
             break;
         case SDLK_d:
-            
             move = Move::MOVE_RIGHT;
             break;
         case SDLK_SPACE:
@@ -66,7 +68,7 @@ void Player::update()
 
     switch (move){
     case Move::NO_MOVE:
-        //std::cout << "NO MOVE" << '\n';
+        /* std::cout << "NO MOVE" << '\n'; */
         if (velocity.x < 0.0f)
         {
             acceleration.x = 0.0f;
@@ -83,13 +85,13 @@ void Player::update()
         break;
     case Move::MOVE_LEFT:
         lookingRight = false;
-        //std::cout << "MOVE LEFT" << '\n';
+        /* std::cout << "MOVE LEFT" << '\n'; */
         acceleration.x = -player_acceleration.x;
         if (velocity.x <= -terminal_velocity.x) {velocity.x = -terminal_velocity.x;}
         break;
     case Move::MOVE_RIGHT:
         lookingRight = true;
-        //std::cout << "MOVE RIGHT" << '\n';
+        /* std::cout << "MOVE RIGHT" << '\n'; */
         acceleration.x = player_acceleration.x;
         if (velocity.x >= terminal_velocity.x) {velocity.x = terminal_velocity.x;} 
         break;
@@ -101,7 +103,7 @@ void Player::update()
 
     switch (jump){
     case Jump::NO_JUMP:
-        //std::cout << "NO JUMP" << '\n';
+        /* std::cout << "NO JUMP" << '\n'; */
         if (velocity.y >= terminal_velocity.y) {velocity.y = terminal_velocity.y;}
         else {acceleration.y = 0.0f;}
         break;
@@ -113,7 +115,7 @@ void Player::update()
         // single jump
         if (hitGround && !hasJumped) 
         {
-            std::cout << "JUMP" << '\n';
+            /* std::cout << "JUMP" << '\n'; */
             acceleration.y = -player_acceleration.y;
             
             jump_count--;
@@ -124,7 +126,7 @@ void Player::update()
         // double jump
         else if (!hitGround && !hasJumped && jump_count > 0)
         {
-            //std::cout << "JUMP" << '\n';
+            /* std::cout << "JUMP" << '\n'; */
             // limit vertical acceleration when space bar pressed consecutively after each other
             if (velocity.y <= -terminal_velocity.y) {acceleration.y = -player_acceleration.y;} 
             else {velocity.y = -terminal_velocity.y;}

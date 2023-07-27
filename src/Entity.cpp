@@ -22,10 +22,8 @@ void Entity::init(SDL_Renderer* renderer, const char* path_name,
                 position_x, position_y, dst_rect_w, dst_rect_h,
                 src_rect_x, src_rect_y, src_rect_w, src_rect_h);
 
-    // setup collider
-    collider.init(renderer, 
-                position_x, position_y, dst_rect_w, dst_rect_h,
-                src_rect_x, src_rect_y, src_rect_w, src_rect_h);
+    // setup collider   
+    collider.init(renderer, position_x, position_y, dst_rect_w, dst_rect_h);
 
     sprite_rect = sprite.dst_rect;
     coll_rect = collider.coll_rect;
@@ -74,9 +72,9 @@ void Entity::update()
         coll_rect.y = collider.top_left.y; 
         coll_rect.x = collider.top_left.x;
     }
-    else
+    else // TODO : fix collider hitting ground
     {
-        position.y = 600.0f - sprite.dst_rect.h / 2;
+        position.y = 600.0f - collider.coll_rect.h / 2;
         sprite.position.y = 600.0f - sprite.dst_rect.h / 2;
         collider.position.y = 600.0f - collider.coll_rect.h / 2;
         
@@ -94,7 +92,7 @@ void Entity::update()
         coll_rect.x = collider.top_left.x;
     }
 
-    //Entity::printInfo();
+    Entity::printInfo();
 
     // reset net force
     force.x = 0.0f;
