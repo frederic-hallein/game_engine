@@ -49,10 +49,11 @@ void Entity::draw()
         SDL_RenderCopyEx(renderer, sprite.getTexture(), &sprite_src_rect, &sprite_dst_rect, 0, nullptr, SDL_FLIP_HORIZONTAL);       
     }
 
-
-    // entity axis
+    // sprite rect
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderDrawRect(renderer, &sprite_dst_rect);
+
+    // entity axis
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderDrawLine(renderer, position.x, position.y, position.x + sprite_dst_rect.w, position.y);
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
@@ -82,7 +83,7 @@ void Entity::update()
     position.x += velocity.x;
     sprite.position.x += velocity.x;
     
-    // update sprite 
+    // update sprite //TODO: make sprite.draw() method
     sprite.update();
     sprite_bottom_center = sprite.bottom_center;
     sprite_bottom_right = sprite.bottom_right;

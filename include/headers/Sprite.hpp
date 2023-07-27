@@ -14,6 +14,7 @@ public:
             int src_rect_x, int src_rect_y, int src_rect_w, int src_rect_h);
     
     void update();
+    void draw();
     void clear();
 
     SDL_Texture* getTexture();

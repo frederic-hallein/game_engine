@@ -82,6 +82,11 @@ void Sprite::update()
     top_right.y = position.y - dst_rect.h / 2;
 }
 
+void Sprite::draw()
+{
+    
+}
+
 
 void Sprite::clear() 
 {
