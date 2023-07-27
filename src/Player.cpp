@@ -5,28 +5,29 @@
 Player::Player() 
 {
     mass = 100.0f;
-    acceleration.x = 0.0f;
     terminal_velocity.x = 10.0f;
     terminal_velocity.y = 20.0f;
+
+    player_acceleration.x = 1.0f;
+    player_acceleration.y = 20.0f;
 }
 
 Player::~Player() {std::cout << "Player destroyed" << std::endl;}
 
 void Player::handleEvents(SDL_Event event)
 {
-
-
     switch(event.type){
     case SDL_KEYDOWN:
         switch(event.key.keysym.sym){
         case SDLK_q:
-            move = Move::LEFT;
+            move = Move::MOVE_LEFT;
             break;
         case SDLK_d:
-            move = Move::RIGHT;
+            
+            move = Move::MOVE_RIGHT;
             break;
         case SDLK_SPACE:
-            action = Action::JUMP;
+            jump = Jump::JUMP;
             break;
         default:
             break;
@@ -37,13 +38,13 @@ void Player::handleEvents(SDL_Event event)
     case SDL_KEYUP:
         switch(event.key.keysym.sym){
         case SDLK_q:
-            move = Move::NONE;
+            move = Move::NO_MOVE;
             break;
         case SDLK_d:
-            move = Move::NONE;
+            move = Move::NO_MOVE;
             break;
         case SDLK_SPACE:
-            action = Action::NO_JUMP;
+            jump = Jump::NO_JUMP;
             hasJumped = false;
             break;
         default:
@@ -64,8 +65,8 @@ void Player::update()
     Entity::update();
 
     switch (move){
-    case Move::NONE:
-        //std::cout << "NONE" << '\n';
+    case Move::NO_MOVE:
+        //std::cout << "NO MOVE" << '\n';
         if (velocity.x < 0.0f)
         {
             acceleration.x = 0.0f;
@@ -80,16 +81,16 @@ void Player::update()
         }
         else {acceleration.x = 0.0f;}        
         break;
-    case Move::LEFT:
+    case Move::MOVE_LEFT:
         lookingRight = false;
-        //std::cout << "LEFT" << '\n';
-        acceleration.x = -1.0f;
+        //std::cout << "MOVE LEFT" << '\n';
+        acceleration.x = -player_acceleration.x;
         if (velocity.x <= -terminal_velocity.x) {velocity.x = -terminal_velocity.x;}
         break;
-    case Move::RIGHT:
+    case Move::MOVE_RIGHT:
         lookingRight = true;
-        //std::cout << "RIGHT" << '\n';
-        acceleration.x = 1.0f;
+        //std::cout << "MOVE RIGHT" << '\n';
+        acceleration.x = player_acceleration.x;
         if (velocity.x >= terminal_velocity.x) {velocity.x = terminal_velocity.x;} 
         break;
 
@@ -98,36 +99,42 @@ void Player::update()
     }
 
 
-    switch (action){
-    case Action::NO_JUMP:
+    switch (jump){
+    case Jump::NO_JUMP:
         //std::cout << "NO JUMP" << '\n';
         if (velocity.y >= terminal_velocity.y) {velocity.y = terminal_velocity.y;}
         else {acceleration.y = 0.0f;}
         break;
 
-    case Action::JUMP:
-        if (hitGround && jump_count <= 0) {jump_count = 2;}
+    case Jump::JUMP:
+        // reset jump count
+        if (hitGround && jump_count <= 1) {jump_count = 2;} 
 
+        // single jump
         if (hitGround && !hasJumped) 
         {
-            //std::cout << "JUMP" << '\n';
-            acceleration.y = -20.0f;
+            std::cout << "JUMP" << '\n';
+            acceleration.y = -player_acceleration.y;
+            
             jump_count--;
 
             hitGround = false;
             hasJumped = true;
         }
+        // double jump
         else if (!hitGround && !hasJumped && jump_count > 0)
         {
-
-            if (velocity.y <= -terminal_velocity.y) {acceleration.y = -20.0f;}
+            //std::cout << "JUMP" << '\n';
+            // limit vertical acceleration when space bar pressed consecutively after each other
+            if (velocity.y <= -terminal_velocity.y) {acceleration.y = -player_acceleration.y;} 
             else {velocity.y = -terminal_velocity.y;}
+            
             jump_count--;
 
             hitGround = false;
             hasJumped = true;
         }
-        else {acceleration.y = 0.0f;}
+        else {acceleration.y = 0.0f;} // no space bar hold
 
         break;
         

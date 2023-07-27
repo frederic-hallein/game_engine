@@ -16,6 +16,8 @@ void Sprite::init(SDL_Renderer* renderer, const char* path_name,
                 int position_x, int position_y, int dst_rect_w, int dst_rect_h,
                 int src_rect_x, int src_rect_y, int src_rect_w, int src_rect_h)
 {
+    this->renderer = renderer;
+
     surface = IMG_Load(path_name);
     texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_FreeSurface(surface);
@@ -80,11 +82,38 @@ void Sprite::update()
 
     top_right.x = position.x + dst_rect.w / 2;
     top_right.y = position.y - dst_rect.h / 2;
+
+    // destination rectangle
+    dst_rect.x = top_left.x;
+    dst_rect.y = top_right.y;
+
+
+    flipHorizontal = false;
+
+    
 }
 
 void Sprite::draw()
 {
     
+    // draw sprite 
+    if (!flipHorizontal)
+    {
+        SDL_RenderCopyEx(renderer, texture, &src_rect, &dst_rect, 0, nullptr, SDL_FLIP_NONE);
+    }
+    else 
+    {
+        SDL_RenderCopyEx(renderer, texture, &src_rect, &dst_rect, 0, nullptr, SDL_FLIP_HORIZONTAL);
+    }
+
+    // draw rect of sprite
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_RenderDrawRect(renderer, &dst_rect);
+}
+
+void Sprite::flip()
+{
+    flipHorizontal = true;
 }
 
 
@@ -94,4 +123,4 @@ void Sprite::clear()
     std::cout << "Sprite cleared" << std::endl;
 }
 
-SDL_Texture* Sprite::getTexture() {return texture;}
+

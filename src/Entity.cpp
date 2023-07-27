@@ -22,117 +22,107 @@ void Entity::init(SDL_Renderer* renderer, const char* path_name,
                 position_x, position_y, dst_rect_w, dst_rect_h,
                 src_rect_x, src_rect_y, src_rect_w, src_rect_h);
 
-    sprite_src_rect = sprite.src_rect;
-    sprite_dst_rect = sprite.dst_rect;
+    // setup collider
+    collider.init(renderer, 
+                position_x, position_y, dst_rect_w, dst_rect_h,
+                src_rect_x, src_rect_y, src_rect_w, src_rect_h);
 
-    sprite_bottom_center = sprite.bottom_center;
-    sprite_bottom_right = sprite.bottom_right;
-    sprite_bottom_left = sprite.bottom_left;
-    sprite_top_center = sprite.top_center;
-    sprite_top_right = sprite.top_right;
-    sprite_top_left = sprite.top_left;
+    sprite_rect = sprite.dst_rect;
+    coll_rect = collider.coll_rect;
+
 
     std::cout << "Entity init" << std::endl;
 }
 
-void Entity::draw()
-{
-    SDL_RenderClear(renderer);
-
-    // flip player sprite
-    if (lookingRight)
-    {
-        SDL_RenderCopyEx(renderer, sprite.getTexture(), &sprite_src_rect, &sprite_dst_rect, 0, nullptr, SDL_FLIP_NONE);
-    }
-    else 
-    {
-        SDL_RenderCopyEx(renderer, sprite.getTexture(), &sprite_src_rect, &sprite_dst_rect, 0, nullptr, SDL_FLIP_HORIZONTAL);       
-    }
-
-    // sprite rect
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_RenderDrawRect(renderer, &sprite_dst_rect);
-
-    // entity axis
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    SDL_RenderDrawLine(renderer, position.x, position.y, position.x + sprite_dst_rect.w, position.y);
-    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-    SDL_RenderDrawLine(renderer, position.x, position.y, position.x, position.y - sprite_dst_rect.h);
-    // entity force vector
-    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-    SDL_RenderDrawLine(renderer, position.x, position.y, position.x + 10 * velocity.x, position.y + 10 * velocity.y);
-}
 
 void Entity::handleEvents(SDL_Event event) {}
 
 void Entity::update() 
 {
-
     // forces x direction
+    force.x += mass * acceleration.x;
+    velocity.x += force.x * (1.0f / mass);
+
+    // forces y direction 
     force.y += mass * (gravity.y + acceleration.y);
     velocity.y += force.y * (1.0f / mass);
     if (velocity.y >= terminal_velocity.y) {velocity.y = terminal_velocity.y;}
 
-    position.y += velocity.y;
-    sprite.position.y += velocity.y;
-    
-    // forces y direction
-    force.x += mass * acceleration.x;
-    velocity.x += force.x * (1.0f / mass);
-
+    // update position of entity, sprite and collider
     position.x += velocity.x;
+    position.y += velocity.y;
     sprite.position.x += velocity.x;
+    sprite.position.y += velocity.y;
+    collider.position.x += velocity.x;
+    collider.position.y += velocity.y;
     
-    // update sprite //TODO: make sprite.draw() method
+    // update sprite 
     sprite.update();
-    sprite_bottom_center = sprite.bottom_center;
-    sprite_bottom_right = sprite.bottom_right;
-    sprite_bottom_left = sprite.bottom_left;
-    sprite_top_center = sprite.top_center;
-    sprite_top_right = sprite.top_right;
-    sprite_top_left = sprite.top_left;
 
+    // update collider
+    collider.update();
 
-    if (sprite_bottom_center.y < 600.0f)
+    if (collider.bottom_center.y < 600.0f)
     {
         hitGround = false;
         
-        // move rect
-        sprite_dst_rect.y = sprite_top_left.y; 
-        sprite_dst_rect.x = sprite_top_left.x;
+        // move sprite rect
+        sprite_rect.y = sprite.top_left.y; 
+        sprite_rect.x = sprite.top_left.x;
+
+        // move collider rect
+        coll_rect.y = collider.top_left.y; 
+        coll_rect.x = collider.top_left.x;
     }
     else
     {
-        position.y = 600.0f - sprite_dst_rect.h / 2;
-        sprite.position.y = 600.0f - sprite_dst_rect.h / 2;
+        position.y = 600.0f - sprite.dst_rect.h / 2;
+        sprite.position.y = 600.0f - sprite.dst_rect.h / 2;
+        collider.position.y = 600.0f - collider.coll_rect.h / 2;
         
         velocity.y = 0.0f;
         
         sprite.update();
-        sprite_bottom_center = sprite.bottom_center;
-        sprite_bottom_right = sprite.bottom_right;
-        sprite_bottom_left = sprite.bottom_left;
-        sprite_top_center = sprite.top_center;
-        sprite_top_right = sprite.top_right;
-        sprite_top_left = sprite.top_left;
+        collider.update();
 
         hitGround = true;
+ 
+        sprite_rect.y = sprite.top_left.y; 
+        sprite_rect.x = sprite.top_left.x;
 
-        sprite_dst_rect.y = sprite_top_left.y; 
-        sprite_dst_rect.x = sprite_top_left.x;
+        coll_rect.y = collider.top_left.y; 
+        coll_rect.x = collider.top_left.x;
     }
 
- 
-
-    Entity::printInfo();
+    //Entity::printInfo();
 
     // reset net force
     force.x = 0.0f;
     force.y = 0.0;
 
+}
 
-    
-    
+
+void Entity::draw()
+{
+    SDL_RenderClear(renderer);
+
+    // draw sprite (flip if direction changed)
+    if (!lookingRight) {sprite.flip();}
+    sprite.draw();
+
+    // draw collider
+    collider.draw();
+
+
+    // entity axis
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_RenderDrawLine(renderer, position.x, position.y, position.x + sprite_rect.w, position.y);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+    SDL_RenderDrawLine(renderer, position.x, position.y, position.x, position.y - sprite_rect.h);
+    // entity force vector
+    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+    SDL_RenderDrawLine(renderer, position.x, position.y, position.x + 10 * velocity.x, position.y + 10 * velocity.y);
 }
 
 void Entity::printInfo()

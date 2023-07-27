@@ -19,21 +19,21 @@ public:
             int position_x, int position_y, int dst_rect_w, int dst_rect_h,
             int src_rect_x, int src_rect_y, int src_rect_w, int src_rect_h);
     
-    void draw();
 
     void handleEvents(SDL_Event event);
     void update();
+    void draw();
     void printInfo();
 
-    void updateSpriteRectPosition();
-    void updateColliderPosition();
+protected:
+    enum Move {NO_MOVE, MOVE_LEFT, MOVE_RIGHT};
+    enum Jump {NO_JUMP, JUMP};
 
     bool hasJumped = false;
     bool hitGround = false;
     bool lookingRight = true;
-protected:
-    SDL_Rect sprite_src_rect;
-    SDL_Rect sprite_dst_rect;
+
+    SDL_Rect sprite_rect;
     SDL_Rect coll_rect;
 
     float mass;
@@ -42,18 +42,13 @@ protected:
     Vector2D terminal_velocity;
     Vector2D acceleration;
     Vector2D force;
-
-    Vector2D sprite_bottom_center;
-    Vector2D sprite_bottom_right;
-    Vector2D sprite_bottom_left;
-    Vector2D sprite_top_center;
-    Vector2D sprite_top_right;
-    Vector2D sprite_top_left;
-
     
 private:
     SDL_Renderer* renderer;
     Sprite sprite;
+    Collider collider;
+
+
 
 
 };

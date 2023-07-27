@@ -12,12 +12,13 @@ public:
     void init(SDL_Renderer* renderer, const char* path_name,
             int position_x, int position_y, int dst_rect_w, int dst_rect_h,
             int src_rect_x, int src_rect_y, int src_rect_w, int src_rect_h);
+
     
     void update();
+    void flip();
     void draw();
     void clear();
 
-    SDL_Texture* getTexture();
 
     SDL_Rect src_rect;
     SDL_Rect dst_rect;
@@ -31,7 +32,11 @@ public:
     Vector2D top_right;
     Vector2D top_left;
 
+    bool flipHorizontal;
+
 private:
+    SDL_Renderer* renderer;
+
     SDL_Surface* surface = nullptr;
     SDL_Texture* texture = nullptr;
 

@@ -11,15 +11,13 @@ public:
     void handleEvents(SDL_Event event);
     void update();
 
-    enum Move {NONE, LEFT, RIGHT};
-    enum Action {NO_JUMP, JUMP};
-
-
 private:
+    Move move;
+    Jump jump;
+
     int jump_count = 2;
 
-    Move move;
-    Action action;
+    Vector2D player_acceleration;
 
 };
 
