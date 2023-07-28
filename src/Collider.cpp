@@ -54,28 +54,28 @@ void Collider::update()
 {
     // update collider rectangle 
     bottom_center.x = position.x;
-    bottom_center.y = position.y + coll_rect.h / 2 - delta_h;
+    bottom_center.y = position.y + coll_rect.h / 2;
 
-    bottom_left.x = position.x - coll_rect.w / 2 + delta_w;
-    bottom_left.y = position.y + coll_rect.h / 2 - delta_h;
+    bottom_left.x = position.x - coll_rect.w / 2;
+    bottom_left.y = position.y + coll_rect.h / 2;
 
-    bottom_right.x = position.x + coll_rect.w / 2 - delta_w;
-    bottom_right.y = position.y + coll_rect.h / 2 - delta_h;
+    bottom_right.x = position.x + coll_rect.w / 2;
+    bottom_right.y = position.y + coll_rect.h / 2;
 
-    middle_left.x = position.x - coll_rect.w / 2 + delta_w;
+    middle_left.x = position.x - coll_rect.w / 2;
     middle_left.y = position.y;
 
-    middle_right.x = position.x + coll_rect.w / 2 - delta_w;
+    middle_right.x = position.x + coll_rect.w / 2;
     middle_right.y = position.y;
 
     top_center.x = position.x;
-    top_center.y = position.y - coll_rect.h / 2 + delta_h;
+    top_center.y = position.y - coll_rect.h / 2;
 
-    top_left.x = position.x - coll_rect.w / 2 + delta_w;
-    top_left.y = position.y - coll_rect.h / 2 + delta_h;
+    top_left.x = position.x - coll_rect.w / 2;
+    top_left.y = position.y - coll_rect.h / 2;
 
-    top_right.x = position.x + coll_rect.w / 2 - delta_w;
-    top_right.y = position.y - coll_rect.h / 2 + delta_h;
+    top_right.x = position.x + coll_rect.w / 2;
+    top_right.y = position.y - coll_rect.h / 2;
 
     // collider rectangle
     coll_rect.x = top_left.x;

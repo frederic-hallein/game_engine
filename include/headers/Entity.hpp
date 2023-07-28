@@ -7,7 +7,7 @@
 #include "headers/Vector2D.hpp"
 
 static Vector2D gravity(0.0f, 1.0f);
-static Vector2D friction(0.5f, 0.0f);
+static Vector2D friction(0.7f, 0.0f);
 
 
 class Entity {
@@ -37,7 +37,6 @@ protected:
     bool hitGround = false;
     bool lookingRight = true;
 
-    SDL_Rect sprite_rect;
     SDL_Rect coll_rect;
 
     float mass;

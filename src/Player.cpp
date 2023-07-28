@@ -6,7 +6,7 @@ Player::Player()
 {
     // setup collider resize
     collider.delta_w = 10.0f;
-    collider.delta_h = 15.0f;
+    collider.delta_h = 3.0f;
 
     // player characteristics
     mass = 100.0f;
@@ -73,17 +73,15 @@ void Player::update()
         /* std::cout << "NO MOVE" << '\n'; */
         if (velocity.x < 0.0f)
         {
-            acceleration.x = 0.0f;
-            velocity.x += friction.x;
-            if (velocity.x >= 0.0f) {velocity.x = 0.0f;}
+            acceleration.x = friction.x;
+            if (velocity.x + acceleration.x > 0.0f) {acceleration.x = 0.0f; velocity.x = 0.0f;}
         }
         else if (velocity.x > 0.0f)
         {
-            acceleration.x = 0.0f;
-            velocity.x -= friction.x;
-            if (velocity.x <= 0.0f) {velocity.x = 0.0f;}
+            acceleration.x = -friction.x;
+            if (velocity.x + acceleration.x < 0.0f) {acceleration.x = 0.0f; velocity.x = 0.0f;}
         }
-        else {acceleration.x = 0.0f;}        
+        else {acceleration.x = 0.0f; velocity.x = 0.0f;}        
         break;
     case Move::MOVE_LEFT:
         lookingRight = false;
