@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 
 #include "headers/Collider.hpp"
 
@@ -24,6 +25,12 @@ void Collider::init(SDL_Renderer* renderer, int position_x, int position_y, int 
     bottom_right.x = position_x + dst_rect_w / 2 - delta_w;
     bottom_right.y = position_y + dst_rect_h / 2 - delta_h;
 
+    middle_left.x = position_x - dst_rect_w / 2 + delta_w;
+    middle_left.y = position_y;
+
+    middle_right.x = position_x + dst_rect_w / 2 - delta_w;
+    middle_right.y = position_y;
+
     top_center.x = position_x;
     top_center.y = position_y - dst_rect_h / 2 + delta_h;
 
@@ -34,10 +41,10 @@ void Collider::init(SDL_Renderer* renderer, int position_x, int position_y, int 
     top_right.y = position_y - dst_rect_h / 2 + delta_h;
 
     // destination rectangle
-    coll_rect.x = top_left.x - delta_w;
-    coll_rect.y = top_right.y - delta_h;
-    coll_rect.w = dst_rect_w - delta_w;
-    coll_rect.h = dst_rect_h - delta_h;
+    coll_rect.x = top_left.x;
+    coll_rect.y = top_left.y;
+    coll_rect.w = std::fabs(middle_right.x - middle_left.x);
+    coll_rect.h = std::fabs(top_center.y - bottom_center.y);
 
     std::cout << "Collider init" << std::endl;
 
@@ -55,6 +62,12 @@ void Collider::update()
     bottom_right.x = position.x + coll_rect.w / 2 - delta_w;
     bottom_right.y = position.y + coll_rect.h / 2 - delta_h;
 
+    middle_left.x = position.x - coll_rect.w / 2 + delta_w;
+    middle_left.y = position.y;
+
+    middle_right.x = position.x + coll_rect.w / 2 - delta_w;
+    middle_right.y = position.y;
+
     top_center.x = position.x;
     top_center.y = position.y - coll_rect.h / 2 + delta_h;
 
@@ -65,8 +78,10 @@ void Collider::update()
     top_right.y = position.y - coll_rect.h / 2 + delta_h;
 
     // collider rectangle
-    coll_rect.x = top_left.x - delta_w;
-    coll_rect.y = top_right.y - delta_h;
+    coll_rect.x = top_left.x;
+    coll_rect.y = top_left.y;
+    
+
 }
 
 void Collider::draw()

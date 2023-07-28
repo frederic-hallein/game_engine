@@ -19,12 +19,14 @@ public:
 
     Vector2D position;
 
-    float delta_w = 0.0f;
-    float delta_h = 0.0f;
-    
+    float delta_w;
+    float delta_h;
+
     Vector2D bottom_center;
     Vector2D bottom_right;
     Vector2D bottom_left;
+    Vector2D middle_right;
+    Vector2D middle_left;
     Vector2D top_center;
     Vector2D top_right;
     Vector2D top_left;

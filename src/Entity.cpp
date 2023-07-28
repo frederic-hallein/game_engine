@@ -30,6 +30,9 @@ void Entity::init(SDL_Renderer* renderer, const char* path_name,
 
 
     std::cout << "Entity init" << std::endl;
+
+
+    
 }
 
 
@@ -37,32 +40,34 @@ void Entity::handleEvents(SDL_Event event) {}
 
 void Entity::update() 
 {
+    // TODO : maybe make a physics class that do these calculations?
+
     // forces x direction
     force.x += mass * acceleration.x;
     velocity.x += force.x * (1.0f / mass);
 
-    // forces y direction 
-    force.y += mass * (gravity.y + acceleration.y);
-    velocity.y += force.y * (1.0f / mass);
-    if (velocity.y >= terminal_velocity.y) {velocity.y = terminal_velocity.y;}
-
     // update position of entity, sprite and collider
     position.x += velocity.x;
-    position.y += velocity.y;
     sprite.position.x += velocity.x;
-    sprite.position.y += velocity.y;
     collider.position.x += velocity.x;
-    collider.position.y += velocity.y;
     
-    // update sprite 
-    sprite.update();
 
-    // update collider
-    collider.update();
 
+    // TODO : do these checks in collider class or collider manager class?
     if (collider.bottom_center.y < 600.0f)
     {
         hitGround = false;
+
+        // forces y direction 
+        force.y += mass * (gravity.y + acceleration.y);
+        velocity.y += force.y * (1.0f / mass);
+        if (velocity.y >= terminal_velocity.y) {velocity.y = terminal_velocity.y;}
+
+        // update position of entity, sprite and collider
+        position.y += velocity.y;
+        sprite.position.y += velocity.y;
+        collider.position.y += velocity.y;
+
         
         // move sprite rect
         sprite_rect.y = sprite.top_left.y; 
@@ -71,17 +76,15 @@ void Entity::update()
         // move collider rect
         coll_rect.y = collider.top_left.y; 
         coll_rect.x = collider.top_left.x;
+        
     }
     else // TODO : fix collider hitting ground
     {
         position.y = 600.0f - collider.coll_rect.h / 2;
-        sprite.position.y = 600.0f - sprite.dst_rect.h / 2;
-        collider.position.y = 600.0f - collider.coll_rect.h / 2;
+        sprite.position.y = position.y; 
+        collider.position.y = position.y;
         
         velocity.y = 0.0f;
-        
-        sprite.update();
-        collider.update();
 
         hitGround = true;
  
@@ -91,6 +94,12 @@ void Entity::update()
         coll_rect.y = collider.top_left.y; 
         coll_rect.x = collider.top_left.x;
     }
+
+    // update sprite 
+    sprite.update();
+
+    // update collider
+    collider.update();
 
     Entity::printInfo();
 
@@ -112,6 +121,7 @@ void Entity::draw()
     // draw collider
     collider.draw();
 
+    // TODO : maybe make a GameObject parent class to Entity?
 
     // entity axis
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);

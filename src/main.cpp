@@ -20,8 +20,8 @@ int main(int argc, char* argv[])
         timer.start();
 
         game.handleEvents();
-        game.update();
         game.render();
+        game.update();
 
         timer.stop();
         timer.delayFrame();

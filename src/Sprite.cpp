@@ -35,6 +35,12 @@ void Sprite::init(SDL_Renderer* renderer, const char* path_name,
     bottom_right.x = position_x + dst_rect_w / 2;
     bottom_right.y = position_y + dst_rect_h / 2;
 
+    middle_left.x = position_x - dst_rect_w / 2;
+    middle_left.y = position_y;
+
+    middle_right.x = position_x + dst_rect_w / 2;
+    middle_right.y = position_y;
+
     top_center.x = position_x;
     top_center.y = position_y - dst_rect_h / 2;
 
@@ -53,7 +59,7 @@ void Sprite::init(SDL_Renderer* renderer, const char* path_name,
 
     // destination rectangle
     dst_rect.x = top_left.x;
-    dst_rect.y = top_right.y;
+    dst_rect.y = top_left.y;
     dst_rect.w = dst_rect_w;
     dst_rect.h = dst_rect_h;
 
@@ -74,6 +80,12 @@ void Sprite::update()
     bottom_right.x = position.x + dst_rect.w / 2;
     bottom_right.y = position.y + dst_rect.h / 2;
 
+    middle_left.x = position.x - dst_rect.w / 2;
+    middle_left.y = position.y;
+
+    middle_right.x = position.x + dst_rect.w / 2;
+    middle_right.y = position.y;
+
     top_center.x = position.x;
     top_center.y = position.y - dst_rect.h / 2;
 
@@ -85,7 +97,7 @@ void Sprite::update()
 
     // destination rectangle
     dst_rect.x = top_left.x;
-    dst_rect.y = top_right.y;
+    dst_rect.y = top_left.y;
 
 
     flipHorizontal = false;

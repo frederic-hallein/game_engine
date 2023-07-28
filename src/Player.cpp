@@ -4,9 +4,11 @@
 
 Player::Player() 
 {
+    // setup collider resize
     collider.delta_w = 10.0f;
-    collider.delta_h = 0.0f;
+    collider.delta_h = 15.0f;
 
+    // player characteristics
     mass = 100.0f;
     terminal_velocity.x = 10.0f;
     terminal_velocity.y = 20.0f;
@@ -128,8 +130,8 @@ void Player::update()
         {
             /* std::cout << "JUMP" << '\n'; */
             // limit vertical acceleration when space bar pressed consecutively after each other
-            if (velocity.y <= -terminal_velocity.y) {acceleration.y = -player_acceleration.y;} 
-            else {velocity.y = -terminal_velocity.y;}
+            velocity.y = 0.0f;
+            acceleration.y = -player_acceleration.y;
             
             jump_count--;
 
