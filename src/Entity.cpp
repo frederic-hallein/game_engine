@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "headers/Entity.hpp"
 
 
@@ -87,8 +85,6 @@ void Entity::update()
 
 
     Entity::printInfo();
-
-
 
     // reset net force
     force.x = 0.0f;

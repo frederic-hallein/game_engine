@@ -1,13 +1,14 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include <iostream>
 
 #include "headers/Sprite.hpp"
 #include "headers/Collider.hpp"
 #include "headers/Vector2D.hpp"
 
-static Vector2D gravity(0.0f, 1.0f);
-static Vector2D friction(0.7f, 0.0f);
+static Vector2D<float> gravity(0.0f, 1.0f);
+static Vector2D<float> friction(0.7f, 0.0f);
 
 
 class Entity {
@@ -40,11 +41,11 @@ protected:
     SDL_Rect coll_rect;
 
     float mass;
-    Vector2D position;
-    Vector2D velocity;
-    Vector2D terminal_velocity;
-    Vector2D acceleration;
-    Vector2D force;
+    Vector2D<float> position;
+    Vector2D<float> velocity;
+    Vector2D<float> terminal_velocity;
+    Vector2D<float> acceleration;
+    Vector2D<float> force;
     
     Collider collider;
     

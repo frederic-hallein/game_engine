@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include <iostream>
+#include <cmath>
 
 #include "headers/Vector2D.hpp"
 
@@ -17,19 +19,19 @@ public:
 
     SDL_Rect coll_rect;
 
-    Vector2D position;
+    Vector2D<float> position;
 
     float delta_w;
     float delta_h;
 
-    Vector2D bottom_center;
-    Vector2D bottom_right;
-    Vector2D bottom_left;
-    Vector2D middle_right;
-    Vector2D middle_left;
-    Vector2D top_center;
-    Vector2D top_right;
-    Vector2D top_left;
+    Vector2D<float> bottom_center;
+    Vector2D<float> bottom_right;
+    Vector2D<float> bottom_left;
+    Vector2D<float> middle_right;
+    Vector2D<float> middle_left;
+    Vector2D<float> top_center;
+    Vector2D<float> top_right;
+    Vector2D<float> top_left;
 
 private:
     SDL_Renderer* renderer;

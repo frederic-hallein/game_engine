@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 #include "headers/Entity.hpp"
 
 class Player : public Entity {
@@ -14,7 +16,7 @@ private:
 
     int jump_count = 2;
 
-    Vector2D player_acceleration;
+    Vector2D<float> player_acceleration;
 
 };
 

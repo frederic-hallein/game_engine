@@ -3,12 +3,18 @@
 #include "headers/Vector2D.hpp"
 
 
-
-Vector2D::Vector2D(float x, float y)
+template <typename T>
+Vector2D<T>::Vector2D(T x, T y) 
 {
     this->x = x;
     this->y = y;
 }
 
-Vector2D::~Vector2D() {}
+template <typename T>
+Vector2D<T>::~Vector2D() {}
+
+
+template struct Vector2D<float>;
+template struct Vector2D<int>;
+
 

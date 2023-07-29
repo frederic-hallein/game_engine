@@ -1,9 +1,9 @@
 #pragma once
 
-
+template <typename T>
 struct Vector2D {
-    Vector2D(float x = 0.0f, float y = 0.0f);
+    Vector2D(T x = 0, T y = 0);
     ~Vector2D();
 
-    float x, y;    
+    T x, y;    
 };
