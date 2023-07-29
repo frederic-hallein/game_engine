@@ -3,8 +3,8 @@
 Player::Player() 
 {
     // setup collider resize
-    collider.delta_w = 10.0f;
-    collider.delta_h = 3.0f;
+    collider.delta_w = 15.0f;
+    collider.delta_h = 0.0f;
 
     // player characteristics
     mass = 100.0f;

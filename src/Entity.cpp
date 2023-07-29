@@ -64,7 +64,7 @@ void Entity::update()
 
 
     // TODO : tilemap system with colliders
-    float ground = 500.0f;
+    float ground = 720.0f;
     if (collider.bottom_center.y < ground) {hitGround = false;}
     else 
     {

@@ -33,16 +33,9 @@ void Game::init(const char* title, int SCREEN_WIDTH, int SCREEN_HEIGHT, bool ful
     // TODO : initialize all entities, tiles, etc. in a level class
 
     // initialize player
-    int sprite_section_x = 32;
-    int sprite_section_y = 43;
-    int sprite_scale = 1;
-    player.init(renderer, "assets/player/player.png", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 
-                sprite_section_x * sprite_scale, sprite_section_y * sprite_scale, 
-                0, 0, sprite_section_x, sprite_section_y);
+    player.init(renderer, "assets/player/player.png", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 64, 64, 0, 0, 32, 32);
 
-    // initialize tilemap
 
-    //tilemap.init();
 
 }
 
@@ -70,7 +63,7 @@ void Game::update()
 void Game::render()
 {
     SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // background
     player.draw();
     SDL_RenderPresent(renderer);
 }

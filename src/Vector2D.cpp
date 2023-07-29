@@ -13,7 +13,6 @@ Vector2D<T>::Vector2D(T x, T y)
 template <typename T>
 Vector2D<T>::~Vector2D() {}
 
-
 template struct Vector2D<float>;
 template struct Vector2D<int>;
 
