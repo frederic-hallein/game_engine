@@ -1,6 +1,9 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <iostream>
+#include <stdio.h>
 
 #include "headers/SpriteManager.hpp"
 #include "headers/Vector2D.hpp"
@@ -24,16 +27,16 @@ public:
     SDL_Rect src_rect;
     SDL_Rect dst_rect;
 
-    Vector2D position;
+    Vector2D<float> position;
     
-    Vector2D bottom_center;
-    Vector2D bottom_right;
-    Vector2D bottom_left;
-    Vector2D middle_right;
-    Vector2D middle_left;
-    Vector2D top_center;
-    Vector2D top_right;
-    Vector2D top_left;
+    Vector2D<float> bottom_center;
+    Vector2D<float> bottom_right;
+    Vector2D<float> bottom_left;
+    Vector2D<float> middle_right;
+    Vector2D<float> middle_left;
+    Vector2D<float> top_center;
+    Vector2D<float> top_right;
+    Vector2D<float> top_left;
 
     bool flipHorizontal;
 

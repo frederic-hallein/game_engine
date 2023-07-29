@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "headers/Player.hpp"
 
 Player::Player() 
