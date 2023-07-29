@@ -5,7 +5,6 @@
 #include <iostream>
 
 #include "headers/Player.hpp"
-#include "headers/TileMap.hpp"
 
 class Game {  
 public:
@@ -27,5 +26,5 @@ private:
     SDL_Event event;
 
     Player player;
-    TileMap tilemap;
+  
 };
