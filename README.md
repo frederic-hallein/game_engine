@@ -22,4 +22,5 @@ After that, make sure you have "mingw32\bin" in your PATH.
 
 # Gameplay
 
-![Recording2024-05-03130953-ezgif com-video-to-gif-converter](https://github.com/frederic-hallein/game_engine/assets/124629735/5982685b-f43a-4094-82a6-460391abdac5)
+![Recording2024-05-03130953-ezgif com-video-to-gif-converter (1)](https://github.com/frederic-hallein/game_engine/assets/124629735/bd2d6b85-1324-4e48-9147-9d238e7135ec)
+
