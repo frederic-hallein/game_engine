@@ -1,6 +1,6 @@
 # game_engine
 
-Custom 2D game engine (still in development).
+Custom 2D game engine. (still in development)
 
 # How to run
 
