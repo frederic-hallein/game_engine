@@ -11,7 +11,7 @@ Step 4: Run the executable using the following command: `./main`.
 
 # How to play
 
-Character control is done using the following keys:
+Character control is done using the following keys: \
 A : move left \
 D : move right \ 
 SPACE : jump and double jump 
