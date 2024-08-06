@@ -16,6 +16,4 @@ A : move left \
 D : move right \
 SPACE : jump and double jump 
 
-# Screencast
 
-[Screencast from 2024-08-06 17-34-46.webm](https://github.com/user-attachments/assets/50ed2974-e699-4b9c-ae78-9433d46be381)
