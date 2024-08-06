@@ -1,6 +1,6 @@
 # 2D Game Engine
 
-A 2D game engine for developing 2D platformer games. 
+A 2D game engine for a simple physics platformer game 
 
 # How to run (Linux)
 
