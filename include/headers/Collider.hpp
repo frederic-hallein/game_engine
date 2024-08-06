@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cmath>
 
-#include "headers/Vector2D.hpp"
+#include "Vector2D.hpp"
 
 class Collider {
 public:

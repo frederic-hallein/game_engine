@@ -1,7 +1,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "headers/SpriteManager.hpp"
+#include "SpriteManager.hpp"
 
 SpriteManager::SpriteManager() {}
 

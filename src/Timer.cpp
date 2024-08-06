@@ -1,7 +1,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 
-#include "headers/Timer.hpp"
+#include "Timer.hpp"
 
 static const int FPS = 60;
 static const int frame_delay = 1000 / FPS;

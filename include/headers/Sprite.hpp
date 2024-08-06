@@ -5,8 +5,8 @@
 #include <iostream>
 #include <stdio.h>
 
-#include "headers/SpriteManager.hpp"
-#include "headers/Vector2D.hpp"
+#include "SpriteManager.hpp"
+#include "Vector2D.hpp"
 
 class Sprite : public SpriteManager{
 public:

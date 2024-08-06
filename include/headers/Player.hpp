@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "headers/Entity.hpp"
+#include "Entity.hpp"
 
 class Player : public Entity {
 public:

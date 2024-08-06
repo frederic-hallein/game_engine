@@ -4,7 +4,7 @@
 #include <SDL2/SDL_image.h>
 #include <iostream>
 
-#include "headers/Player.hpp"
+#include "Player.hpp"
 
 class Game {  
 public:

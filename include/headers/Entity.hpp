@@ -3,9 +3,9 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 
-#include "headers/Sprite.hpp"
-#include "headers/Collider.hpp"
-#include "headers/Vector2D.hpp"
+#include "Sprite.hpp"
+#include "Collider.hpp"
+#include "Vector2D.hpp"
 
 static Vector2D<float> gravity(0.0f, 1.0f);
 static Vector2D<float> friction(0.7f, 0.0f);
