@@ -18,5 +18,4 @@ SPACE : jump and double jump
 
 # Screencast
 
-![Recording2024-05-03130953-ezgif com-video-to-gif-converter (1)](https://github.com/frederic-hallein/game_engine/assets/124629735/bd2d6b85-1324-4e48-9147-9d238e7135ec)
-
+[Screencast from 2024-08-06 14-48-29.webm](https://github.com/user-attachments/assets/eeef9668-5d98-427b-9550-34492dea8ce7)
