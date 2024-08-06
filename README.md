@@ -13,7 +13,7 @@ Step 4: Run the executable using the following command: `./main`.
 
 Character control is done using the following keys: \
 A : move left \
-D : move right \ 
+D : move right \
 SPACE : jump and double jump 
 
 # Screencast
