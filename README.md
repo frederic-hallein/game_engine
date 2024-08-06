@@ -1,26 +1,22 @@
-# game_engine
+# 2D Game Engine
 
-Custom 2D game engine. (still in development)
+A 2D game engine for developing 2D platformer games. 
 
-# How to run
+# How to run (Linux)
 
 Step 1: Download all the files. \
-Step 2: Via a terminal go to the game_engine directory. \
-Step 3: Enter the "mingw32-make -f makefile" command. This should create a main.exe in the same folder. \
-Step 4: Run main.exe. 
+Step 2: Open a terminal and go inside the `/game_engine` directory. \
+Step 3: By running the `make all` command, it creates a `main` executable file in the same directory.  \
+Step 4: Run the executable using the following command: `./main`. 
 
 # How to play
 
-Move left with A and move right with D (WASD key configuration). Jump and double jump with SPACE.
+Character control is done using the following keys:
+A : move left \
+D : move right \ 
+SPACE : jump and double jump 
 
-# Troubleshooting
-
-If the command from Step 3 is not recognized, try to install the mingw-get-setup from the website: \
-[https://sourceforge.net/projects/mingw/](https://sourceforge.net/projects/mingw/) and install the mingw32-make package in the MinGW Installation Manager. \
-After that, make sure you have "mingw32\bin" in your PATH.
-
-
-# Gameplay
+# Screencast
 
 ![Recording2024-05-03130953-ezgif com-video-to-gif-converter (1)](https://github.com/frederic-hallein/game_engine/assets/124629735/bd2d6b85-1324-4e48-9147-9d238e7135ec)
 
