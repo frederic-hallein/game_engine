@@ -7,12 +7,12 @@ A 2D game engine for a simple physics platformer game
 Step 1: Download all the files. \
 Step 2: Install the SDL2 library using the following website: https://lazyfoo.net/tutorials/SDL/01_hello_SDL/linux/index.php. \
 Step 3: Open a terminal and go inside the `/game_engine` directory. \
-Step 4: Type the following command: 
+Step 4: Use the following command: 
 ```
 make all
 ``` 
 This should create a `main` executable file in the same directory.  \
-Step 5: Run the executable by typing the following command: 
+Step 5: Run the executable by using the following command: 
 ```
 ./main
 ```
